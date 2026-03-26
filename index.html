@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>D. Alejandro González M. — Portafolio Artístico</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --black: #080808;
+    --deep: #0f0f0f;
+    --surface: #161616;
+    --gold: #C4973A;
+    --gold-light: #E2B86A;
+    --ivory: #F2EDE4;
+    --muted: #888880;
+    --dim: #444440;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--ivory);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  .cursor {
+    position: fixed; width: 8px; height: 8px;
+    background: var(--gold); border-radius: 50%;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, background 0.3s;
+  }
+  .cursor-ring {
+    position: fixed; width: 36px; height: 36px;
+    border: 1px solid rgba(196,151,58,0.5); border-radius: 50%;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
+  }
+  a:hover ~ .cursor-ring, button:hover ~ .cursor-ring { width: 60px; height: 60px; border-color: var(--gold); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 28px 60px;
+    mix-blend-mode: difference;
+  }
+  .nav-logo {
+    font-family: 'Cormorant', serif; font-size: 15px; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--ivory);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 40px; list-style: none; }
+  .nav-links a {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ivory); text-decoration: none; opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative; height: 100vh;
+    display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0 60px 80px;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 40%, rgba(196,151,58,0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(196,151,58,0.04) 0%, transparent 50%);
+    animation: breathe 8s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%,100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .hero-tag {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px; opacity: 0;
+    animation: fadeUp 1s 0.3s forwards;
+  }
+  .hero-name {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(72px, 12vw, 160px);
+    font-weight: 300; line-height: 0.9;
+    letter-spacing: -0.02em; color: var(--ivory);
+    opacity: 0; animation: fadeUp 1s 0.5s forwards;
+  }
+  .hero-name em { font-style: italic; color: var(--gold); }
+  .hero-subtitle {
+    display: flex; align-items: center; gap: 24px;
+    margin-top: 32px; opacity: 0;
+    animation: fadeUp 1s 0.8s forwards;
+  }
+  .hero-subtitle span {
+    font-size: 12px; letter-spacing: 0.25em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .hero-subtitle .sep { width: 40px; height: 1px; background: var(--dim); }
+  .hero-scroll {
+    position: absolute; right: 60px; bottom: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    opacity: 0; animation: fadeUp 1s 1.2s forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--muted); writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px; height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollDrop 2s 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollDrop {
+    0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
+    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 120px 60px; }
+  .section-label {
+    font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 60px; display: flex;
+    align-items: center; gap: 20px;
+  }
+  .section-label::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--gold); opacity: 0.4; }
+  .section-title {
+    font-family: 'Cormorant', serif;
+    font-size: clamp(40px, 6vw, 80px);
+    font-weight: 300; line-height: 1.05;
+    letter-spacing: -0.01em;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--deep); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; margin-top: 60px; align-items: start;
+  }
+  .about-text p {
+    font-size: 17px; line-height: 1.8; color: rgba(242,237,228,0.8);
+    margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--gold); font-weight: 400; }
+  .disciplines {
+    display: flex; flex-direction: column; gap: 2px;
+    border-top: 1px solid var(--dim);
+  }
+  .discipline-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 0; border-bottom: 1px solid var(--dim);
+    transition: padding-left 0.3s;
+  }
+  .discipline-item:hover { padding-left: 16px; }
+  .discipline-name {
+    font-family: 'Cormorant', serif; font-size: 28px;
+    font-weight: 600; letter-spacing: 0.02em;
+  }
+  .discipline-detail {
+    font-size: 11px; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .discipline-arrow { color: var(--gold); font-size: 18px; opacity: 0; transition: opacity 0.3s; }
+  .discipline-item:hover .discipline-arrow { opacity: 1; }
+
+  /* ── PROJECTS ── */
+  #projects { background: var(--black); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 2px; margin-top: 60px;
+  }
+  .project-card {
+    background: var(--surface); padding: 48px 36px;
+    position: relative; overflow: hidden;
+    transition: background 0.4s;
+    cursor: pointer;
+  }
+  .project-card::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0);
+    transform-origin: left; transition: transform 0.4s;
+  }
+  .project-card:hover::before { transform: scaleX(1); }
+  .project-card:hover { background: #1a1a1a; }
+  .project-num {
+    font-family: 'Cormorant', serif; font-size: 60px;
+    font-weight: 300; color: var(--dim);
+    line-height: 1; margin-bottom: 32px;
+  }
+  .project-title {
+    font-family: 'Cormorant', serif; font-size: 26px;
+    font-weight: 600; margin-bottom: 12px;
+  }
+  .project-subtitle {
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .project-desc {
+    font-size: 14px; line-height: 1.7;
+    color: var(--muted);
+  }
+
+  /* ── FESTIVALS ── */
+  #festivals { background: var(--deep); }
+  .festivals-split {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; margin-top: 60px;
+  }
+  .festival-group-title {
+    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 32px;
+    padding-bottom: 16px; border-bottom: 1px solid var(--dim);
+  }
+  .festival-list { list-style: none; }
+  .festival-item {
+    display: flex; align-items: baseline;
+    gap: 20px; padding: 14px 0;
+    border-bottom: 1px solid rgba(68,68,64,0.4);
+    transition: padding-left 0.3s;
+  }
+  .festival-item:hover { padding-left: 12px; }
+  .festival-year {
+    font-family: 'Cormorant', serif; font-size: 13px;
+    color: var(--gold); min-width: 44px; font-weight: 400;
+  }
+  .festival-name { font-size: 14px; line-height: 1.4; }
+  .festival-location {
+    font-size: 11px; color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ── VIDEO ── */
+  #video { background: var(--black); }
+  .video-wrapper {
+    margin-top: 60px; position: relative;
+    padding-bottom: 56.25%; height: 0; overflow: hidden;
+    background: var(--surface);
+  }
+  .video-wrapper iframe {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%; border: none;
+  }
+  .video-caption {
+    margin-top: 24px; font-size: 12px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); text-align: center;
+  }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--surface); text-align: center; padding: 140px 60px; }
+  .contact-intro {
+    font-family: 'Cormorant', serif; font-size: clamp(32px, 5vw, 64px);
+    font-weight: 300; line-height: 1.2; max-width: 700px;
+    margin: 0 auto 60px; color: var(--ivory);
+  }
+  .contact-intro em { font-style: italic; color: var(--gold); }
+  .contact-links {
+    display: flex; justify-content: center;
+    gap: 60px; flex-wrap: wrap;
+  }
+  .contact-link {
+    display: flex; flex-direction: column;
+    align-items: center; gap: 8px; text-decoration: none;
+    color: var(--ivory); transition: color 0.3s;
+  }
+  .contact-link:hover { color: var(--gold); }
+  .contact-link-label {
+    font-size: 10px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  .contact-link-value { font-size: 16px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); padding: 40px 60px;
+    display: flex; justify-content: space-between;
+    align-items: center; border-top: 1px solid var(--dim);
+  }
+  footer p { font-size: 11px; color: var(--dim); letter-spacing: 0.15em; }
+  footer .footer-name {
+    font-family: 'Cormorant', serif; font-size: 14px;
+    color: var(--muted); letter-spacing: 0.1em;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0; transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 24px 30px; }
+    .nav-links { display: none; }
+    section { padding: 80px 30px; }
+    #hero { padding: 0 30px 60px; }
+    .hero-scroll { display: none; }
+    .about-grid, .festivals-split { grid-template-columns: 1fr; gap: 48px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; }
+    .contact-links { gap: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">AGM</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre mí</a></li>
+    <li><a href="#projects">Proyectos</a></li>
+    <li><a href="#festivals">Festivales</a></li>
+    <li><a href="#video">Video</a></li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Portafolio Artístico · Medellín, Colombia</div>
+  <h1 class="hero-name">D. <em>Alejandro</em><br>González M.</h1>
+  <div class="hero-subtitle">
+    <span>Bailarín</span>
+    <div class="sep"></div>
+    <span>Actor</span>
+    <div class="sep"></div>
+    <span>Modelo</span>
+    <div class="sep"></div>
+    <span>Comunicador Social</span>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Sobre mí</div>
+  <h2 class="section-title reveal">Artista <em>multidisciplinar</em><br>con visión global</h2>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>Soy <strong>Diego Alejandro González Martínez</strong>, bailarín profesional de danza contemporánea con formación en Acrodanza, percusión afrobrasileña, percusión corporal, danza afro y teatro.</p>
+      <p>Comunicador Social y Licenciado en Danza (Universidad de Antioquia, 8.° semestre). He sido parte de proyectos interdisciplinarios como <strong>AAINJAA</strong> (5 años, Bogotá) y <strong>Kipar</strong> (1 año, Medellín).</p>
+      <p>Participación en teatro musical con escuelas como <strong>Broadway en Medellín</strong> y <strong>Neverland Teatro Musical</strong>. Presencia en festivales artísticos nacionales e internacionales.</p>
+      <p>Actualmente investigo la simbiosis entre <strong>Inteligencia Artificial y el movimiento corporal</strong>, presentado en REDIV 2025.</p>
+    </div>
+    <div class="disciplines reveal">
+      <div class="discipline-item">
+        <div>
+          <div class="discipline-name">Bailarín</div>
+          <div class="discipline-detail">Contemporáneo · Afro · Acrodanza</div>
+        </div>
+        <div class="discipline-arrow">→</div>
+      </div>
+      <div class="discipline-item">
+        <div>
+          <div class="discipline-name">Actor</div>
+          <div class="discipline-detail">Teatro musical · Cortometraje</div>
+        </div>
+        <div class="discipline-arrow">→</div>
+      </div>
+      <div class="discipline-item">
+        <div>
+          <div class="discipline-name">Modelo</div>
+          <div class="discipline-detail">Editorial · Artístico</div>
+        </div>
+        <div class="discipline-arrow">→</div>
+      </div>
+      <div class="discipline-item">
+        <div>
+          <div class="discipline-name">Comunicador</div>
+          <div class="discipline-detail">Social · Estratega creativo · IA & Artes</div>
+        </div>
+        <div class="discipline-arrow">→</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Proyectos</div>
+  <h2 class="section-title reveal">Trayectoria <em>artística</em></h2>
+  <div class="projects-grid">
+    <div class="project-card reveal">
+      <div class="project-num">01</div>
+      <div class="project-title">AAINJAA</div>
+      <div class="project-subtitle">Proyecto multidisciplinar · 2018–2019</div>
+      <p class="project-desc">Música, danza y teatro en una sola propuesta escénica. Formación interdisciplinar en música, danza, teatro y acrobacia. Performer en el espectáculo <em>AAINJAA dice HOLA</em>. Presentaciones en festivales nacionales: Feria de las Flores, Feria de Cali, Feria de Manizales y Festival Iberoamericano de Bogotá.</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">02</div>
+      <div class="project-title">Teatro Musical</div>
+      <div class="project-subtitle">Actor · 2023–2025</div>
+      <p class="project-desc">Obra <em>Cabaret</em> con Broadway en Medellín (2023). Musical <em>Sueños de Papel</em>, Neverland Teatro Musical (2023). Cortometraje universitario <em>Me gustas cuando callas</em> — personaje protagonista Carlos (2025).</p>
+    </div>
+    <div class="project-card reveal">
+      <div class="project-num">03</div>
+      <div class="project-title">Modelaje Editorial</div>
+      <div class="project-subtitle">Modelo · 2018–2024</div>
+      <p class="project-desc">Colaboraciones con el fotógrafo artístico <strong>Juan Jiménez</strong> (Bogotá, 2018–2021) y <strong>Bastian</strong> (Book 2024). Proyectos de fotografía artística que exploran el cuerpo como lenguaje visual.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FESTIVALS -->
+<section id="festivals">
+  <div class="section-label">Festivales</div>
+  <h2 class="section-title reveal">Presencia <em>internacional</em></h2>
+  <div class="festivals-split">
+    <div class="reveal">
+      <div class="festival-group-title">Festivales internacionales</div>
+      <ul class="festival-list">
+        <li class="festival-item">
+          <span class="festival-year">2016</span>
+          <div>
+            <div class="festival-name">Folklore Festival MI PERU</div>
+            <div class="festival-location">Perú</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2018</span>
+          <div>
+            <div class="festival-name">Macao International Parade</div>
+            <div class="festival-location">Macao, China</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2019</span>
+          <div>
+            <div class="festival-name">Jeddah Season</div>
+            <div class="festival-location">Arabia Saudita</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2019</span>
+          <div>
+            <div class="festival-name">Riyadh Season</div>
+            <div class="festival-location">Arabia Saudita</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2019</span>
+          <div>
+            <div class="festival-name">Latium Festival</div>
+            <div class="festival-location">Italia</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2019</span>
+          <div>
+            <div class="festival-name">Santa Lucía International Festival</div>
+            <div class="festival-location">Monterrey, México</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="reveal">
+      <div class="festival-group-title">Festivales nacionales</div>
+      <ul class="festival-list">
+        <li class="festival-item">
+          <span class="festival-year">2018</span>
+          <div>
+            <div class="festival-name">Feria de las Flores</div>
+            <div class="festival-location">Medellín, Colombia</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2018</span>
+          <div>
+            <div class="festival-name">Feria de Cali</div>
+            <div class="festival-location">Cali, Colombia</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2018</span>
+          <div>
+            <div class="festival-name">Feria de Manizales</div>
+            <div class="festival-location">Manizales, Colombia</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2018</span>
+          <div>
+            <div class="festival-name">Festival Iberoamericano de Teatro</div>
+            <div class="festival-location">Bogotá, Colombia</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2023</span>
+          <div>
+            <div class="festival-name">Feria de las Flores — Producción</div>
+            <div class="festival-location">Medellín, Colombia</div>
+          </div>
+        </li>
+        <li class="festival-item">
+          <span class="festival-year">2023</span>
+          <div>
+            <div class="festival-name">Circulart</div>
+            <div class="festival-location">Medellín, Colombia</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO -->
+<section id="video">
+  <div class="section-label">Reel</div>
+  <h2 class="section-title reveal">Danza <em>contemporánea</em> &amp; Partnering</h2>
+  <div class="video-wrapper reveal">
+    <iframe src="https://player.vimeo.com/video/1124040227?badge=0&autopause=0&player_id=0&app_id=58479" 
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+      title="Danza Contemporánea — D. Alejandro González M.">
+    </iframe>
+  </div>
+  <p class="video-caption reveal">Danza contemporánea · Partnering · Medellín, Colombia</p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label" style="justify-content:center;">Contacto</p>
+  <h2 class="contact-intro reveal">¿Tienes un proyecto en mente? Hablemos <em>juntos</em>.</h2>
+  <div class="contact-links reveal">
+    <a href="mailto:zarlek.g@gmail.com" class="contact-link">
+      <span class="contact-link-label">Email</span>
+      <span class="contact-link-value">zarlek.g@gmail.com</span>
+    </a>
+    <a href="tel:+573102427662" class="contact-link">
+      <span class="contact-link-label">WhatsApp / Teléfono</span>
+      <span class="contact-link-value">+57 310 242 7662</span>
+    </a>
+    <a href="https://instagram.com/alejo_9610" target="_blank" class="contact-link">
+      <span class="contact-link-label">Instagram</span>
+      <span class="contact-link-value">@alejo_9610</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Diego Alejandro González Martínez</p>
+  <span class="footer-name">Medellín, Colombia</span>
+  <p>Portafolio Artístico</p>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  function animRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
