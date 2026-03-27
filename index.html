@@ -4,330 +4,215 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>D. Alejandro González M. — Portafolio Artístico</title>
+<meta name="description" content="Bailarín, Actor y Modelo colombiano. Portafolio artístico de D. Alejandro González M., con presencia en Arabia Saudita, Macao, Italia y América Latina."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
 <style>
-  :root {
-    --black: #080808;
-    --deep: #0f0f0f;
-    --surface: #161616;
-    --gold: #C4973A;
-    --gold-light: #E2B86A;
-    --ivory: #F2EDE4;
-    --muted: #888880;
-    --dim: #444440;
-  }
+:root {
+  --black: #060606; --deep: #0d0d0d; --surface: #141414;
+  --gold: #C4973A; --ivory: #F2EDE4; --muted: #888880; --dim: #333330;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--ivory);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* CURSOR */
+.cursor{position:fixed;width:7px;height:7px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1px solid rgba(196,151,58,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .35s,height .35s,border-color .3s}
+body:has(a:hover) .cursor-ring,body:has(button:hover) .cursor-ring{width:56px;height:56px;border-color:var(--gold)}
+@media(max-width:768px){.cursor,.cursor-ring{display:none}body{cursor:auto}}
 
-  html { scroll-behavior: smooth; }
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:28px 60px;display:flex;justify-content:space-between;align-items:center}
+nav::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,6,6,.92),transparent);pointer-events:none}
+.nav-logo{font-family:'Cormorant',serif;font-size:15px;letter-spacing:.28em;text-transform:uppercase;color:var(--ivory);text-decoration:none;position:relative}
+.nav-links{display:flex;gap:36px;list-style:none;position:relative}
+.nav-links a{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--ivory);text-decoration:none;opacity:.55;transition:opacity .3s}
+.nav-links a:hover{opacity:1}
+@media(max-width:900px){nav{padding:22px 24px}.nav-links{display:none}}
 
-  body {
-    background: var(--black);
-    color: var(--ivory);
-    font-family: 'Jost', sans-serif;
-    font-weight: 300;
-    overflow-x: hidden;
-    cursor: none;
-  }
+/* HERO */
+#hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 80px;overflow:hidden}
+.hero-grain{position:absolute;inset:0;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:200px}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 65% 35%,rgba(196,151,58,.07),transparent 70%)}
+.hero-tag{font-size:10px;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin-bottom:22px;opacity:0;animation:fadeUp .9s .3s forwards}
+.hero-name{font-family:'Cormorant',serif;font-size:clamp(64px,11.5vw,158px);font-weight:300;line-height:.88;letter-spacing:-.02em;opacity:0;animation:fadeUp 1s .5s forwards}
+.hero-name em{font-style:italic;color:var(--gold)}
+.hero-name .prefix{font-size:clamp(28px,4vw,56px);display:block;margin-bottom:6px;color:rgba(242,237,228,.45);font-weight:200}
+.hero-roles{display:flex;flex-wrap:wrap;margin-top:36px;opacity:0;animation:fadeUp .9s .8s forwards;border-top:1px solid var(--dim);padding-top:28px}
+.hero-role{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);padding-right:28px;margin-right:28px;border-right:1px solid var(--dim);line-height:1}
+.hero-role:last-child{border-right:none;padding-right:0;margin-right:0}
+.hero-scroll{position:absolute;right:60px;bottom:80px;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:fadeUp .9s 1.1s forwards}
+.hero-scroll span{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--muted);writing-mode:vertical-rl}
+.scroll-line{width:1px;height:56px;background:linear-gradient(to bottom,var(--gold),transparent);animation:scrollDrop 2.2s 1.5s ease-in-out infinite}
+@keyframes scrollDrop{0%{transform:scaleY(0);transform-origin:top;opacity:1}60%{transform:scaleY(1);transform-origin:top;opacity:1}100%{transform:scaleY(1);transform-origin:bottom;opacity:0}}
+@media(max-width:900px){#hero{padding:0 24px 60px}.hero-scroll{display:none}.hero-role{font-size:9px;padding-right:16px;margin-right:16px}}
 
-  /* ── CUSTOM CURSOR ── */
-  .cursor {
-    position: fixed; width: 8px; height: 8px;
-    background: var(--gold); border-radius: 50%;
-    pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s, background 0.3s;
-  }
-  .cursor-ring {
-    position: fixed; width: 36px; height: 36px;
-    border: 1px solid rgba(196,151,58,0.5); border-radius: 50%;
-    pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.18s ease, width 0.3s, height 0.3s, border-color 0.3s;
-  }
-  a:hover ~ .cursor-ring, button:hover ~ .cursor-ring { width: 60px; height: 60px; border-color: var(--gold); }
+/* PHOTO STRIP */
+.photo-strip{position:relative;height:70vh;overflow:hidden}
+.photo-strip-img{position:absolute;inset:-15%;width:100%;height:130%;object-fit:cover;object-position:center top;filter:brightness(.55) contrast(1.05)}
+.photo-strip-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,var(--black) 0%,transparent 20%,transparent 80%,var(--black) 100%)}
+.photo-strip-caption{position:absolute;bottom:40px;right:60px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted)}
+.photo-strip-placeholder{position:absolute;inset:0;background:linear-gradient(135deg,#0d0d0d,#1a1a1a);display:none;align-items:center;justify-content:center}
+.photo-strip-placeholder span{font-family:'Cormorant',serif;font-size:13px;letter-spacing:.3em;color:var(--dim);text-transform:uppercase}
+@media(max-width:900px){.photo-strip{height:50vw;min-height:280px}.photo-strip-caption{right:24px;bottom:24px}}
 
-  /* ── NAV ── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 28px 60px;
-    mix-blend-mode: difference;
-  }
-  .nav-logo {
-    font-family: 'Cormorant', serif; font-size: 15px; font-weight: 400;
-    letter-spacing: 0.25em; text-transform: uppercase; color: var(--ivory);
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 40px; list-style: none; }
-  .nav-links a {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--ivory); text-decoration: none; opacity: 0.7;
-    transition: opacity 0.3s;
-  }
-  .nav-links a:hover { opacity: 1; }
+/* SECTIONS */
+section{padding:110px 60px}
+.s-label{font-size:10px;letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin-bottom:52px;display:flex;align-items:center;gap:18px}
+.s-label::after{content:'';flex:0 0 36px;height:1px;background:var(--gold);opacity:.4}
+.s-title{font-family:'Cormorant',serif;font-size:clamp(38px,5.5vw,76px);font-weight:300;line-height:1.05;letter-spacing:-.01em}
+.s-title em{font-style:italic;color:var(--gold)}
+@media(max-width:900px){section{padding:72px 24px}}
 
-  /* ── HERO ── */
-  #hero {
-    position: relative; height: 100vh;
-    display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 0 60px 80px;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 70% 40%, rgba(196,151,58,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, rgba(196,151,58,0.04) 0%, transparent 50%);
-    animation: breathe 8s ease-in-out infinite;
-  }
-  @keyframes breathe {
-    0%,100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  .hero-tag {
-    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 24px; opacity: 0;
-    animation: fadeUp 1s 0.3s forwards;
-  }
-  .hero-name {
-    font-family: 'Cormorant', serif;
-    font-size: clamp(72px, 12vw, 160px);
-    font-weight: 300; line-height: 0.9;
-    letter-spacing: -0.02em; color: var(--ivory);
-    opacity: 0; animation: fadeUp 1s 0.5s forwards;
-  }
-  .hero-name em { font-style: italic; color: var(--gold); }
-  .hero-subtitle {
-    display: flex; align-items: center; gap: 24px;
-    margin-top: 32px; opacity: 0;
-    animation: fadeUp 1s 0.8s forwards;
-  }
-  .hero-subtitle span {
-    font-size: 12px; letter-spacing: 0.25em;
-    text-transform: uppercase; color: var(--muted);
-  }
-  .hero-subtitle .sep { width: 40px; height: 1px; background: var(--dim); }
-  .hero-scroll {
-    position: absolute; right: 60px; bottom: 80px;
-    display: flex; flex-direction: column; align-items: center; gap: 12px;
-    opacity: 0; animation: fadeUp 1s 1.2s forwards;
-  }
-  .hero-scroll span {
-    font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--muted); writing-mode: vertical-rl;
-  }
-  .scroll-line {
-    width: 1px; height: 60px;
-    background: linear-gradient(to bottom, var(--gold), transparent);
-    animation: scrollDrop 2s 1.5s ease-in-out infinite;
-  }
-  @keyframes scrollDrop {
-    0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
-    50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-    100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
-  }
+/* REVEAL SYSTEM */
+.reveal{opacity:0;transition:opacity .9s ease,transform .9s ease}
+.reveal-up{transform:translateY(48px)}
+.reveal-left{transform:translateX(-48px)}
+.reveal-right{transform:translateX(48px)}
+.reveal-scale{transform:scale(.94)}
+.reveal.visible{opacity:1!important;transform:none!important}
+.delay-1{transition-delay:.12s}.delay-2{transition-delay:.24s}
+.delay-3{transition-delay:.36s}.delay-4{transition-delay:.48s}.delay-5{transition-delay:.60s}
 
-  /* ── SECTIONS ── */
-  section { padding: 120px 60px; }
-  .section-label {
-    font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 60px; display: flex;
-    align-items: center; gap: 20px;
-  }
-  .section-label::after { content: ''; flex: 0 0 40px; height: 1px; background: var(--gold); opacity: 0.4; }
-  .section-title {
-    font-family: 'Cormorant', serif;
-    font-size: clamp(40px, 6vw, 80px);
-    font-weight: 300; line-height: 1.05;
-    letter-spacing: -0.01em;
-  }
-  .section-title em { font-style: italic; color: var(--gold); }
+/* ABOUT */
+#about{background:var(--deep)}
+.about-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:80px;margin-top:56px}
+.about-eyebrow{font-family:'Cormorant',serif;font-size:20px;font-style:italic;color:var(--gold);margin-bottom:28px;line-height:1.4}
+.about-text p{font-size:16px;line-height:1.9;color:rgba(242,237,228,.78);margin-bottom:20px}
+.about-text p strong{color:var(--ivory);font-weight:400}
+.about-stats{display:flex;margin-top:40px;border-top:1px solid var(--dim);padding-top:32px}
+.stat{flex:1;border-right:1px solid var(--dim);padding-right:24px;margin-right:24px}
+.stat:last-child{border-right:none;padding-right:0;margin-right:0}
+.stat-num{font-family:'Cormorant',serif;font-size:44px;font-weight:300;color:var(--gold);line-height:1}
+.stat-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:6px}
 
-  /* ── ABOUT ── */
-  #about { background: var(--deep); }
-  .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; margin-top: 60px; align-items: start;
-  }
-  .about-text p {
-    font-size: 17px; line-height: 1.8; color: rgba(242,237,228,0.8);
-    margin-bottom: 20px;
-  }
-  .about-text p strong { color: var(--gold); font-weight: 400; }
-  .disciplines {
-    display: flex; flex-direction: column; gap: 2px;
-    border-top: 1px solid var(--dim);
-  }
-  .discipline-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 22px 0; border-bottom: 1px solid var(--dim);
-    transition: padding-left 0.3s;
-  }
-  .discipline-item:hover { padding-left: 16px; }
-  .discipline-name {
-    font-family: 'Cormorant', serif; font-size: 28px;
-    font-weight: 600; letter-spacing: 0.02em;
-  }
-  .discipline-detail {
-    font-size: 11px; letter-spacing: 0.15em;
-    text-transform: uppercase; color: var(--muted);
-  }
-  .discipline-arrow { color: var(--gold); font-size: 18px; opacity: 0; transition: opacity 0.3s; }
-  .discipline-item:hover .discipline-arrow { opacity: 1; }
+/* ACCORDION */
+.disciplines{display:flex;flex-direction:column}
+.disc-item{border-bottom:1px solid var(--dim);overflow:hidden}
+.disc-header{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;transition:padding-left .35s;user-select:none}
+.disc-header:hover{padding-left:12px}
+.disc-header-left{flex:1}
+.disc-name{font-family:'Cormorant',serif;font-size:28px;font-weight:600;transition:color .3s}
+.disc-header:hover .disc-name,.disc-item.open .disc-name{color:var(--gold)}
+.disc-tag{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:3px}
+.disc-icon{color:var(--gold);font-size:22px;font-weight:200;width:28px;text-align:center;transition:transform .4s ease;flex-shrink:0;line-height:1}
+.disc-item.open .disc-icon{transform:rotate(45deg)}
+.disc-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1)}
+.disc-body-inner{padding:0 0 28px 0}
+.disc-body-inner p{font-size:14px;line-height:1.8;color:rgba(242,237,228,.68);margin-bottom:12px}
+.disc-body-inner p:last-child{margin-bottom:0}
+.disc-body-inner strong{color:var(--gold);font-weight:400}
+.disc-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.disc-pill{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:5px 12px}
+@media(max-width:900px){.about-grid{grid-template-columns:1fr;gap:48px}.about-stats{flex-wrap:wrap;gap:24px}.stat{border-right:none;flex:0 0 45%}}
 
-  /* ── PROJECTS ── */
-  #projects { background: var(--black); }
-  .projects-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    gap: 2px; margin-top: 60px;
-  }
-  .project-card {
-    background: var(--surface); padding: 48px 36px;
-    position: relative; overflow: hidden;
-    transition: background 0.4s;
-    cursor: pointer;
-  }
-  .project-card::before {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 2px;
-    background: var(--gold); transform: scaleX(0);
-    transform-origin: left; transition: transform 0.4s;
-  }
-  .project-card:hover::before { transform: scaleX(1); }
-  .project-card:hover { background: #1a1a1a; }
-  .project-num {
-    font-family: 'Cormorant', serif; font-size: 60px;
-    font-weight: 300; color: var(--dim);
-    line-height: 1; margin-bottom: 32px;
-  }
-  .project-title {
-    font-family: 'Cormorant', serif; font-size: 26px;
-    font-weight: 600; margin-bottom: 12px;
-  }
-  .project-subtitle {
-    font-size: 11px; letter-spacing: 0.2em;
-    text-transform: uppercase; color: var(--gold);
-    margin-bottom: 20px;
-  }
-  .project-desc {
-    font-size: 14px; line-height: 1.7;
-    color: var(--muted);
-  }
+/* PROJECTS */
+#projects{background:var(--black)}
+.proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:56px}
+.proj-card{position:relative;overflow:hidden;min-height:380px;display:flex;flex-direction:column;justify-content:flex-end;padding:40px 32px}
+.proj-card-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.28) contrast(1.1);transition:transform .7s,filter .5s}
+.proj-card:hover .proj-card-bg{transform:scale(1.05);filter:brightness(.38) contrast(1.1)}
+.proj-card-fallback{position:absolute;inset:0;background:var(--surface)}
+.proj-card::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.97) 0%,rgba(6,6,6,.25) 65%,transparent 100%)}
+.proj-card-content{position:relative;z-index:2}
+.proj-num{font-family:'Cormorant',serif;font-size:52px;font-weight:300;color:rgba(196,151,58,.3);line-height:1;margin-bottom:20px}
+.proj-title{font-family:'Cormorant',serif;font-size:28px;font-weight:600;margin-bottom:8px}
+.proj-meta{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.proj-desc{font-size:13px;line-height:1.75;color:rgba(242,237,228,.62)}
+.proj-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .45s;z-index:3}
+.proj-card:hover::before{transform:scaleX(1)}
+@media(max-width:900px){.proj-grid{grid-template-columns:1fr}.proj-card{min-height:280px}}
 
-  /* ── FESTIVALS ── */
-  #festivals { background: var(--deep); }
-  .festivals-split {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 80px; margin-top: 60px;
-  }
-  .festival-group-title {
-    font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase;
-    color: var(--gold); margin-bottom: 32px;
-    padding-bottom: 16px; border-bottom: 1px solid var(--dim);
-  }
-  .festival-list { list-style: none; }
-  .festival-item {
-    display: flex; align-items: baseline;
-    gap: 20px; padding: 14px 0;
-    border-bottom: 1px solid rgba(68,68,64,0.4);
-    transition: padding-left 0.3s;
-  }
-  .festival-item:hover { padding-left: 12px; }
-  .festival-year {
-    font-family: 'Cormorant', serif; font-size: 13px;
-    color: var(--gold); min-width: 44px; font-weight: 400;
-  }
-  .festival-name { font-size: 14px; line-height: 1.4; }
-  .festival-location {
-    font-size: 11px; color: var(--muted);
-    letter-spacing: 0.1em;
-  }
+/* GALLERY */
+#gallery{background:var(--deep);padding-bottom:0}
+.gallery-featured{position:relative;height:80vh;overflow:hidden;margin-top:56px;cursor:pointer}
+.gallery-featured img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.72);transition:transform .8s,filter .5s}
+.gallery-featured:hover img{transform:scale(1.03);filter:brightness(.88)}
+.gallery-featured-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.7),transparent 55%);display:flex;align-items:flex-end;padding:48px}
+.gallery-featured-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.gallery-featured-credit{font-family:'Cormorant',serif;font-size:30px;font-weight:300;color:var(--ivory);margin-top:6px}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px}
+.gallery-cell{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
+.gallery-cell:nth-child(1){grid-row:span 2;aspect-ratio:auto;min-height:500px}
+.gallery-cell img{width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:transform .6s,filter .4s;display:block}
+.gallery-cell:hover img{transform:scale(1.06);filter:brightness(1)}
+.gallery-cell-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:18px;background:rgba(6,6,6,0);transition:background .4s}
+.gallery-cell:hover .gallery-cell-overlay{background:rgba(6,6,6,.28)}
+.gallery-cell-credit{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.gallery-cell:hover .gallery-cell-credit{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.gallery-featured{height:55vw;min-height:260px}.gallery-grid{grid-template-columns:repeat(2,1fr)}.gallery-cell:nth-child(1){grid-row:span 1;min-height:auto;aspect-ratio:3/4}}
 
-  /* ── VIDEO ── */
-  #video { background: var(--black); }
-  .video-wrapper {
-    margin-top: 60px; position: relative;
-    padding-bottom: 56.25%; height: 0; overflow: hidden;
-    background: var(--surface);
-  }
-  .video-wrapper iframe {
-    position: absolute; top: 0; left: 0;
-    width: 100%; height: 100%; border: none;
-  }
-  .video-caption {
-    margin-top: 24px; font-size: 12px;
-    letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); text-align: center;
-  }
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;background:rgba(6,6,6,.97);z-index:1000;display:none;align-items:center;justify-content:center}
+.lightbox.open{display:flex}
+.lightbox-img{max-width:90vw;max-height:90vh;object-fit:contain}
+.lightbox-close{position:absolute;top:32px;right:40px;font-size:26px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:'Jost',sans-serif;transition:color .3s}
+.lightbox-close:hover{color:var(--ivory)}
+.lightbox-nav{position:absolute;top:50%;transform:translateY(-50%);font-size:22px;color:var(--muted);cursor:pointer;background:none;border:none;padding:20px;transition:color .3s;font-family:'Jost',sans-serif}
+.lightbox-nav:hover{color:var(--gold)}
+.lightbox-nav.prev{left:20px}.lightbox-nav.next{right:20px}
+.lightbox-counter{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
 
-  /* ── CONTACT ── */
-  #contact { background: var(--surface); text-align: center; padding: 140px 60px; }
-  .contact-intro {
-    font-family: 'Cormorant', serif; font-size: clamp(32px, 5vw, 64px);
-    font-weight: 300; line-height: 1.2; max-width: 700px;
-    margin: 0 auto 60px; color: var(--ivory);
-  }
-  .contact-intro em { font-style: italic; color: var(--gold); }
-  .contact-links {
-    display: flex; justify-content: center;
-    gap: 60px; flex-wrap: wrap;
-  }
-  .contact-link {
-    display: flex; flex-direction: column;
-    align-items: center; gap: 8px; text-decoration: none;
-    color: var(--ivory); transition: color 0.3s;
-  }
-  .contact-link:hover { color: var(--gold); }
-  .contact-link-label {
-    font-size: 10px; letter-spacing: 0.3em;
-    text-transform: uppercase; color: var(--muted);
-  }
-  .contact-link-value { font-size: 16px; }
+/* FESTIVALS */
+#festivals{background:var(--black)}
+.fest-split{display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:56px}
+.fest-group-title{font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);padding-bottom:16px;border-bottom:1px solid var(--dim);margin-bottom:4px}
+.fest-list{list-style:none}
+.fest-item{display:flex;align-items:baseline;gap:20px;padding:13px 0;border-bottom:1px solid rgba(51,51,48,.5);transition:padding-left .3s}
+.fest-item:hover{padding-left:10px}
+.fest-year{font-family:'Cormorant',serif;font-size:13px;color:var(--gold);min-width:40px}
+.fest-name{font-size:14px;line-height:1.4}
+.fest-loc{font-size:11px;color:var(--muted);letter-spacing:.08em}
+@media(max-width:900px){.fest-split{grid-template-columns:1fr;gap:48px}}
 
-  /* ── FOOTER ── */
-  footer {
-    background: var(--black); padding: 40px 60px;
-    display: flex; justify-content: space-between;
-    align-items: center; border-top: 1px solid var(--dim);
-  }
-  footer p { font-size: 11px; color: var(--dim); letter-spacing: 0.15em; }
-  footer .footer-name {
-    font-family: 'Cormorant', serif; font-size: 14px;
-    color: var(--muted); letter-spacing: 0.1em;
-  }
+/* VIDEO */
+#video{background:var(--deep)}
+.video-pull{font-family:'Cormorant',serif;font-size:clamp(20px,3vw,32px);font-style:italic;color:rgba(242,237,228,.45);max-width:600px;margin:0 auto 48px;text-align:center;line-height:1.5}
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;background:var(--surface)}
+.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none}
+.video-credit{margin-top:24px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);text-align:center}
 
-  /* ── ANIMATIONS ── */
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .reveal {
-    opacity: 0; transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+/* CONTACT */
+#contact{background:var(--surface);text-align:center;padding:130px 60px;position:relative;overflow:hidden}
+.contact-bg{position:absolute;inset:0;background-size:cover;background-position:center top;filter:brightness(.08);pointer-events:none}
+.contact-inner{position:relative;z-index:2}
+.contact-eyebrow{font-size:10px;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:36px}
+.contact-title{font-family:'Cormorant',serif;font-size:clamp(32px,5.5vw,68px);font-weight:300;line-height:1.15;max-width:760px;margin:0 auto 20px}
+.contact-title em{font-style:italic;color:var(--gold)}
+.contact-sub{font-size:14px;color:var(--muted);max-width:480px;margin:0 auto 60px;line-height:1.75}
+.contact-links{display:flex;justify-content:center;gap:56px;flex-wrap:wrap}
+.contact-link{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:var(--ivory);transition:color .3s,transform .3s}
+.contact-link:hover{color:var(--gold);transform:translateY(-4px)}
+.contact-link-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.contact-link:hover .contact-link-label{color:var(--gold)}
+.contact-link-value{font-size:16px}
+.contact-divider{width:1px;height:40px;background:var(--dim)}
+@media(max-width:900px){#contact{padding:80px 24px}.contact-links{gap:32px}.contact-divider{display:none}}
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 24px 30px; }
-    .nav-links { display: none; }
-    section { padding: 80px 30px; }
-    #hero { padding: 0 30px 60px; }
-    .hero-scroll { display: none; }
-    .about-grid, .festivals-split { grid-template-columns: 1fr; gap: 48px; }
-    .projects-grid { grid-template-columns: 1fr; }
-    footer { flex-direction: column; gap: 12px; text-align: center; }
-    .contact-links { gap: 36px; }
-  }
+/* FOOTER */
+footer{background:var(--black);padding:36px 60px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--dim)}
+footer p{font-size:11px;color:var(--dim);letter-spacing:.14em}
+.footer-mark{font-family:'Cormorant',serif;font-size:14px;color:rgba(196,151,58,.4);letter-spacing:.1em}
+@media(max-width:900px){footer{flex-direction:column;gap:10px;text-align:center;padding:28px 24px}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+  <button class="lightbox-close" id="lbClose">✕</button>
+  <button class="lightbox-nav prev" id="lbPrev">←</button>
+  <img src="" alt="" class="lightbox-img" id="lbImg"/>
+  <button class="lightbox-nav next" id="lbNext">→</button>
+  <div class="lightbox-counter" id="lbCounter"></div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -335,199 +220,248 @@
   <ul class="nav-links">
     <li><a href="#about">Sobre mí</a></li>
     <li><a href="#projects">Proyectos</a></li>
+    <li><a href="#gallery">Galería</a></li>
     <li><a href="#festivals">Festivales</a></li>
-    <li><a href="#video">Video</a></li>
+    <li><a href="#video">Reel</a></li>
     <li><a href="#contact">Contacto</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-glow"></div>
   <div class="hero-tag">Portafolio Artístico · Medellín, Colombia</div>
-  <h1 class="hero-name">D. <em>Alejandro</em><br>González M.</h1>
-  <div class="hero-subtitle">
-    <span>Bailarín</span>
-    <div class="sep"></div>
-    <span>Actor</span>
-    <div class="sep"></div>
-    <span>Modelo</span>
-    <div class="sep"></div>
-    <span>Comunicador Social</span>
+  <h1 class="hero-name">
+    <span class="prefix">D.</span>
+    <em>Alejandro</em><br>González M.
+  </h1>
+  <div class="hero-roles">
+    <span class="hero-role">Bailarín</span>
+    <span class="hero-role">Actor</span>
+    <span class="hero-role">Modelo</span>
+    <span class="hero-role">Comunicador Social</span>
+    <span class="hero-role">Investigador IA &amp; Artes</span>
   </div>
-  <div class="hero-scroll">
-    <span>Scroll</span>
-    <div class="scroll-line"></div>
-  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
+
+<!-- PHOTO STRIP -->
+<div class="photo-strip" id="photoStrip">
+  <img class="photo-strip-img" id="stripImg"
+    src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0008-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T200446Z&X-Amz-Expires=17525&X-Amz-Signature=083ed3200e5957c182f6b3e19e635e4b4cee338fb999a1de1033bd2bd0047e31&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2000%3A56%3A51%20GMT"
+    alt="Book 2024 — Ph: Bastian"/>
+  <div class="photo-strip-placeholder" id="stripPlaceholder">
+    <span>Reemplazar con /images/book-bastian-1.jpg</span>
+  </div>
+  <div class="photo-strip-overlay"></div>
+  <span class="photo-strip-caption">Book 2024 · Ph: Bastian</span>
+</div>
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="section-label">Sobre mí</div>
-  <h2 class="section-title reveal">Artista <em>multidisciplinar</em><br>con visión global</h2>
+  <div class="s-label reveal reveal-left">Sobre mí</div>
+  <h2 class="s-title reveal reveal-up">Cinco países.<br>Un solo <em>lenguaje.</em></h2>
   <div class="about-grid">
-    <div class="about-text reveal">
-      <p>Soy <strong>Diego Alejandro González Martínez</strong>, bailarín profesional de danza contemporánea con formación en Acrodanza, percusión afrobrasileña, percusión corporal, danza afro y teatro.</p>
-      <p>Comunicador Social y Licenciado en Danza (Universidad de Antioquia, 8.° semestre). He sido parte de proyectos interdisciplinarios como <strong>AAINJAA</strong> (5 años, Bogotá) y <strong>Kipar</strong> (1 año, Medellín).</p>
-      <p>Participación en teatro musical con escuelas como <strong>Broadway en Medellín</strong> y <strong>Neverland Teatro Musical</strong>. Presencia en festivales artísticos nacionales e internacionales.</p>
-      <p>Actualmente investigo la simbiosis entre <strong>Inteligencia Artificial y el movimiento corporal</strong>, presentado en REDIV 2025.</p>
+    <div class="about-text">
+      <p class="about-eyebrow reveal reveal-left delay-1">"Hay artistas que actúan en el mundo. Alejandro lo reconfigura."</p>
+      <p class="reveal reveal-up delay-1">El cuerpo de <strong>Diego Alejandro González Martínez</strong> ha sido escenario en Arabia Saudita, Macao, Italia, México y Colombia. No como visitante — como protagonista. Bailarín profesional de danza contemporánea formado en Acrodanza, percusión afrobrasileña, percusión corporal, danza afro y teatro.</p>
+      <p class="reveal reveal-up delay-2">Comunicador Social y Licenciado en Danza en curso (Universidad de Antioquia). Parte de proyectos interdisciplinares de alto perfil como <strong>AAINJAA</strong> (5 años, Bogotá) y <strong>Kipar</strong> (Medellín). En las tablas con <strong>Broadway en Medellín</strong> y <strong>Neverland Teatro Musical</strong>.</p>
+      <p class="reveal reveal-up delay-3">Hoy cruza una frontera que pocos artistas han tocado: la simbiosis entre <strong>Inteligencia Artificial y el movimiento corporal</strong>. Investigación presentada en REDIV 2025. El arte también se piensa.</p>
+      <div class="about-stats reveal reveal-up delay-4">
+        <div class="stat"><div class="stat-num">6+</div><div class="stat-label">Años de carrera</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Países</div></div>
+        <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Festivales</div></div>
+      </div>
     </div>
-    <div class="disciplines reveal">
-      <div class="discipline-item">
-        <div>
-          <div class="discipline-name">Bailarín</div>
-          <div class="discipline-detail">Contemporáneo · Afro · Acrodanza</div>
+
+    <div class="disciplines reveal reveal-right delay-1">
+
+      <div class="disc-item">
+        <div class="disc-header">
+          <div class="disc-header-left">
+            <div class="disc-name">Bailarín</div>
+            <div class="disc-tag">Contemporáneo · Afro · Acrodanza</div>
+          </div>
+          <div class="disc-icon">+</div>
         </div>
-        <div class="discipline-arrow">→</div>
-      </div>
-      <div class="discipline-item">
-        <div>
-          <div class="discipline-name">Actor</div>
-          <div class="discipline-detail">Teatro musical · Cortometraje</div>
+        <div class="disc-body">
+          <div class="disc-body-inner">
+            <p>Formación técnica en <strong>danza contemporánea</strong>, Acrodanza, percusión afrobrasileña, percusión corporal y danza afro. Un entrenamiento que une rigor técnico con expresividad escénica.</p>
+            <p>Proyectos: <strong>AAINJAA</strong> (espectáculo interdisciplinar, 2018–2019), <strong>Kipar</strong> (Medellín), festivales nacionales e internacionales en 5 países. Actualmente investiga el movimiento en diálogo con la Inteligencia Artificial.</p>
+            <div class="disc-pills">
+              <span class="disc-pill">Contemporáneo</span>
+              <span class="disc-pill">Acrodanza</span>
+              <span class="disc-pill">Percusión corporal</span>
+              <span class="disc-pill">Danza afro</span>
+            </div>
+          </div>
         </div>
-        <div class="discipline-arrow">→</div>
       </div>
-      <div class="discipline-item">
-        <div>
-          <div class="discipline-name">Modelo</div>
-          <div class="discipline-detail">Editorial · Artístico</div>
+
+      <div class="disc-item">
+        <div class="disc-header">
+          <div class="disc-header-left">
+            <div class="disc-name">Actor</div>
+            <div class="disc-tag">Teatro musical · Cortometraje</div>
+          </div>
+          <div class="disc-icon">+</div>
         </div>
-        <div class="discipline-arrow">→</div>
-      </div>
-      <div class="discipline-item">
-        <div>
-          <div class="discipline-name">Comunicador</div>
-          <div class="discipline-detail">Social · Estratega creativo · IA & Artes</div>
+        <div class="disc-body">
+          <div class="disc-body-inner">
+            <p>Obra <strong>Cabaret</strong> con Broadway en Medellín (2023). Musical <strong>Sueños de Papel</strong> con Neverland Teatro Musical (2023). Cortometraje universitario <em>Me gustas cuando callas</em> — protagonista Carlos (2025).</p>
+            <p>La actuación como extensión natural de un cuerpo que ya sabe comunicar en el espacio.</p>
+            <div class="disc-pills">
+              <span class="disc-pill">Teatro musical</span>
+              <span class="disc-pill">Cortometraje</span>
+              <span class="disc-pill">Dramaturgia física</span>
+            </div>
+          </div>
         </div>
-        <div class="discipline-arrow">→</div>
       </div>
+
+      <div class="disc-item">
+        <div class="disc-header">
+          <div class="disc-header-left">
+            <div class="disc-name">Modelo</div>
+            <div class="disc-tag">Editorial · Artístico</div>
+          </div>
+          <div class="disc-icon">+</div>
+        </div>
+        <div class="disc-body">
+          <div class="disc-body-inner">
+            <p>Colaboraciones con el fotógrafo <strong>Juan Jiménez</strong> (Bogotá, 2018–2021) y <strong>Bastian</strong> (Book 2024). Fotografía que no retrata cuerpos sino que los argumenta — imágenes que permanecen.</p>
+            <div class="disc-pills">
+              <span class="disc-pill">Editorial</span>
+              <span class="disc-pill">Fotografía artística</span>
+              <span class="disc-pill">Book 2024</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="disc-item">
+        <div class="disc-header">
+          <div class="disc-header-left">
+            <div class="disc-name">Comunicador</div>
+            <div class="disc-tag">Social · Estrategia · IA &amp; Artes</div>
+          </div>
+          <div class="disc-icon">+</div>
+        </div>
+        <div class="disc-body">
+          <div class="disc-body-inner">
+            <p>Comunicador Social graduado (CUN, 2018). Community Manager y estratega digital para marcas creativas (2020–2023). Productor y booker para <strong>Cimarrón Colombia</strong> (grupo nominado al Grammy, 2023).</p>
+            <p>Ponente en <strong>REDIV 2025</strong>: <em>"IA y su simbiosis con el cuerpo y el movimiento."</em> La investigación como práctica artística.</p>
+            <div class="disc-pills">
+              <span class="disc-pill">Gestión creativa</span>
+              <span class="disc-pill">IA aplicada</span>
+              <span class="disc-pill">Producción</span>
+              <span class="disc-pill">REDIV 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="section-label">Proyectos</div>
-  <h2 class="section-title reveal">Trayectoria <em>artística</em></h2>
-  <div class="projects-grid">
-    <div class="project-card reveal">
-      <div class="project-num">01</div>
-      <div class="project-title">AAINJAA</div>
-      <div class="project-subtitle">Proyecto multidisciplinar · 2018–2019</div>
-      <p class="project-desc">Música, danza y teatro en una sola propuesta escénica. Formación interdisciplinar en música, danza, teatro y acrobacia. Performer en el espectáculo <em>AAINJAA dice HOLA</em>. Presentaciones en festivales nacionales: Feria de las Flores, Feria de Cali, Feria de Manizales y Festival Iberoamericano de Bogotá.</p>
+  <div class="s-label reveal reveal-left">Proyectos</div>
+  <h2 class="s-title reveal reveal-up">Cada proyecto,<br>una <em>huella.</em></h2>
+  <div class="proj-grid">
+    <div class="proj-card reveal reveal-up delay-1">
+      <div class="proj-card-fallback"></div>
+      <div class="proj-card-bg" style="background-image:url('https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0003-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T014737Z&X-Amz-Expires=84620&X-Amz-Signature=01cbd0a2506dbf925c4bd4a2588d8ca4e0fc8eee131b136bd5adc9b05f574dc7&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A17%3A57%20GMT')"></div>
+      <div class="proj-card-content">
+        <div class="proj-num">01</div>
+        <div class="proj-title">AAINJAA</div>
+        <div class="proj-meta">Proyecto interdisciplinar · 2018 – 2019</div>
+        <p class="proj-desc">Música, danza y teatro fundidos en una sola propuesta escénica. Cinco años de proceso. Tres países. Un espectáculo que cruzó continentes: Jeddah, Macao, Manizales, Bogotá.</p>
+      </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-num">02</div>
-      <div class="project-title">Teatro Musical</div>
-      <div class="project-subtitle">Actor · 2023–2025</div>
-      <p class="project-desc">Obra <em>Cabaret</em> con Broadway en Medellín (2023). Musical <em>Sueños de Papel</em>, Neverland Teatro Musical (2023). Cortometraje universitario <em>Me gustas cuando callas</em> — personaje protagonista Carlos (2025).</p>
+    <div class="proj-card reveal reveal-up delay-2">
+      <div class="proj-card-fallback"></div>
+      <div class="proj-card-bg" style="background-image:url('https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0007-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T214817Z&X-Amz-Expires=12403&X-Amz-Signature=bf5a3ac4f3b70e00a4445fb26d1886f39eaaed32f510a4459324b04a8e3c4808&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A15%3A00%20GMT')"></div>
+      <div class="proj-card-content">
+        <div class="proj-num">02</div>
+        <div class="proj-title">Teatro Musical</div>
+        <div class="proj-meta">Actor · 2023 – 2025</div>
+        <p class="proj-desc"><em>Cabaret. Sueños de Papel.</em> Un cortometraje universitario. La voz, el gesto y el personaje como extensiones de un cuerpo que ya sabe moverse.</p>
+      </div>
     </div>
-    <div class="project-card reveal">
-      <div class="project-num">03</div>
-      <div class="project-title">Modelaje Editorial</div>
-      <div class="project-subtitle">Modelo · 2018–2024</div>
-      <p class="project-desc">Colaboraciones con el fotógrafo artístico <strong>Juan Jiménez</strong> (Bogotá, 2018–2021) y <strong>Bastian</strong> (Book 2024). Proyectos de fotografía artística que exploran el cuerpo como lenguaje visual.</p>
+    <div class="proj-card reveal reveal-up delay-3">
+      <div class="proj-card-fallback"></div>
+      <div class="proj-card-bg" style="background-image:url('https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0009-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T010313Z&X-Amz-Expires=86932&X-Amz-Signature=443ffcf801d1b609548ec4163ec5bc9db95f8f45cd8f69369ba70d2f0765da25&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A12%3A05%20GMT')"></div>
+      <div class="proj-card-content">
+        <div class="proj-num">03</div>
+        <div class="proj-title">Modelaje Editorial</div>
+        <div class="proj-meta">Modelo · 2018 – 2024</div>
+        <p class="proj-desc">Con Juan Jiménez y Bastian — fotógrafos que no retratan cuerpos, sino que los argumentan. Imágenes que quedan.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="s-label reveal reveal-left">Archivo visual</div>
+  <h2 class="s-title reveal reveal-up">Book &amp; <em>Portafolio</em></h2>
+  <div class="gallery-featured reveal reveal-scale" data-lb="0">
+    <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0009-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T010313Z&X-Amz-Expires=86932&X-Amz-Signature=443ffcf801d1b609548ec4163ec5bc9db95f8f45cd8f69369ba70d2f0765da25&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A12%3A05%20GMT" alt="Book 2024 — Ph: Bastian"/>
+    <div class="gallery-featured-overlay">
+      <div>
+        <div class="gallery-featured-label">Book 2024 · Clic para ampliar</div>
+        <div class="gallery-featured-credit">Ph: Bastian</div>
+      </div>
+    </div>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-cell reveal reveal-up delay-1" data-lb="1">
+      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0008-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T200446Z&X-Amz-Expires=17525&X-Amz-Signature=083ed3200e5957c182f6b3e19e635e4b4cee338fb999a1de1033bd2bd0047e31&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2000%3A56%3A51%20GMT" alt="Book 2024 — Ph: Bastian"/>
+      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">Book 2024 · Ph: Bastian</span></div>
+    </div>
+    <div class="gallery-cell reveal reveal-up delay-2" data-lb="2">
+      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0010-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T201104Z&X-Amz-Expires=17516&X-Amz-Signature=366ff37846c84997bf07c8faf9d752cdfa5feebe0af8ac85e5d6a0936f7dee5b&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A03%3A00%20GMT" alt="2021 — Ph: Juan Jiménez"/>
+      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">2021 · Ph: Juan Jiménez</span></div>
+    </div>
+    <div class="gallery-cell reveal reveal-up delay-3" data-lb="3">
+      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0011-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T070139Z&X-Amz-Expires=67081&X-Amz-Signature=22d3b91fa7ecc4ab5ff59836df55d2dbce78b07cf6c961472896807a4728b1e9&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A39%3A40%20GMT" alt="2019 — Ph: Juan Jiménez"/>
+      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">2019 · Ph: Juan Jiménez</span></div>
+    </div>
+    <div class="gallery-cell reveal reveal-up delay-4" data-lb="4">
+      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0012-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T161609Z&X-Amz-Expires=32680&X-Amz-Signature=af0a29b193eb3e9ff17c95cd696f355d50631e0daa5b56e85c6070314534ad57&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A20%3A49%20GMT" alt="2018 — Ph: Juan Jiménez"/>
+      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">2018 · Ph: Juan Jiménez</span></div>
     </div>
   </div>
 </section>
 
 <!-- FESTIVALS -->
 <section id="festivals">
-  <div class="section-label">Festivales</div>
-  <h2 class="section-title reveal">Presencia <em>internacional</em></h2>
-  <div class="festivals-split">
-    <div class="reveal">
-      <div class="festival-group-title">Festivales internacionales</div>
-      <ul class="festival-list">
-        <li class="festival-item">
-          <span class="festival-year">2016</span>
-          <div>
-            <div class="festival-name">Folklore Festival MI PERU</div>
-            <div class="festival-location">Perú</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2018</span>
-          <div>
-            <div class="festival-name">Macao International Parade</div>
-            <div class="festival-location">Macao, China</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2019</span>
-          <div>
-            <div class="festival-name">Jeddah Season</div>
-            <div class="festival-location">Arabia Saudita</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2019</span>
-          <div>
-            <div class="festival-name">Riyadh Season</div>
-            <div class="festival-location">Arabia Saudita</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2019</span>
-          <div>
-            <div class="festival-name">Latium Festival</div>
-            <div class="festival-location">Italia</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2019</span>
-          <div>
-            <div class="festival-name">Santa Lucía International Festival</div>
-            <div class="festival-location">Monterrey, México</div>
-          </div>
-        </li>
+  <div class="s-label reveal reveal-left">Presencia</div>
+  <h2 class="s-title reveal reveal-up">Escenarios que<br>no se <em>olvidan.</em></h2>
+  <div class="fest-split">
+    <div class="reveal reveal-left delay-1">
+      <div class="fest-group-title">Internacional</div>
+      <ul class="fest-list">
+        <li class="fest-item"><span class="fest-year">2016</span><div><div class="fest-name">Folklore Festival MI PERU</div><div class="fest-loc">Perú</div></div></li>
+        <li class="fest-item"><span class="fest-year">2018</span><div><div class="fest-name">Macao International Parade</div><div class="fest-loc">Macao, China</div></div></li>
+        <li class="fest-item"><span class="fest-year">2019</span><div><div class="fest-name">Jeddah Season</div><div class="fest-loc">Arabia Saudita</div></div></li>
+        <li class="fest-item"><span class="fest-year">2019</span><div><div class="fest-name">Riyadh Season</div><div class="fest-loc">Arabia Saudita</div></div></li>
+        <li class="fest-item"><span class="fest-year">2019</span><div><div class="fest-name">Latium Festival</div><div class="fest-loc">Italia</div></div></li>
+        <li class="fest-item"><span class="fest-year">2019</span><div><div class="fest-name">Santa Lucía International Festival</div><div class="fest-loc">Monterrey, México</div></div></li>
       </ul>
     </div>
-    <div class="reveal">
-      <div class="festival-group-title">Festivales nacionales</div>
-      <ul class="festival-list">
-        <li class="festival-item">
-          <span class="festival-year">2018</span>
-          <div>
-            <div class="festival-name">Feria de las Flores</div>
-            <div class="festival-location">Medellín, Colombia</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2018</span>
-          <div>
-            <div class="festival-name">Feria de Cali</div>
-            <div class="festival-location">Cali, Colombia</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2018</span>
-          <div>
-            <div class="festival-name">Feria de Manizales</div>
-            <div class="festival-location">Manizales, Colombia</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2018</span>
-          <div>
-            <div class="festival-name">Festival Iberoamericano de Teatro</div>
-            <div class="festival-location">Bogotá, Colombia</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2023</span>
-          <div>
-            <div class="festival-name">Feria de las Flores — Producción</div>
-            <div class="festival-location">Medellín, Colombia</div>
-          </div>
-        </li>
-        <li class="festival-item">
-          <span class="festival-year">2023</span>
-          <div>
-            <div class="festival-name">Circulart</div>
-            <div class="festival-location">Medellín, Colombia</div>
-          </div>
-        </li>
+    <div class="reveal reveal-right delay-2">
+      <div class="fest-group-title">Nacional</div>
+      <ul class="fest-list">
+        <li class="fest-item"><span class="fest-year">2018</span><div><div class="fest-name">Feria de las Flores</div><div class="fest-loc">Medellín, Colombia</div></div></li>
+        <li class="fest-item"><span class="fest-year">2018</span><div><div class="fest-name">Feria de Cali</div><div class="fest-loc">Cali, Colombia</div></div></li>
+        <li class="fest-item"><span class="fest-year">2018</span><div><div class="fest-name">Feria de Manizales</div><div class="fest-loc">Manizales, Colombia</div></div></li>
+        <li class="fest-item"><span class="fest-year">2018</span><div><div class="fest-name">Festival Iberoamericano de Teatro</div><div class="fest-loc">Bogotá, Colombia</div></div></li>
+        <li class="fest-item"><span class="fest-year">2023</span><div><div class="fest-name">Feria de las Flores — Producción</div><div class="fest-loc">Medellín, Colombia</div></div></li>
+        <li class="fest-item"><span class="fest-year">2023</span><div><div class="fest-name">Circulart</div><div class="fest-loc">Medellín, Colombia</div></div></li>
       </ul>
     </div>
   </div>
@@ -535,67 +469,108 @@
 
 <!-- VIDEO -->
 <section id="video">
-  <div class="section-label">Reel</div>
-  <h2 class="section-title reveal">Danza <em>contemporánea</em> &amp; Partnering</h2>
-  <div class="video-wrapper reveal">
-    <iframe src="https://player.vimeo.com/video/1124040227?badge=0&autopause=0&player_id=0&app_id=58479" 
-      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-      title="Danza Contemporánea — D. Alejandro González M.">
-    </iframe>
+  <div class="s-label reveal reveal-left">Reel</div>
+  <h2 class="s-title reveal reveal-up">Danza <em>contemporánea</em></h2>
+  <p class="video-pull reveal reveal-up delay-1">"El cuerpo en movimiento dice lo que las palabras no alcanzan."</p>
+  <div class="video-wrap reveal reveal-scale delay-2">
+    <iframe src="https://player.vimeo.com/video/1124040227?badge=0&autopause=0&player_id=0&app_id=58479"
+      allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+      title="Danza Contemporánea · Partnering — D. Alejandro González M."></iframe>
   </div>
-  <p class="video-caption reveal">Danza contemporánea · Partnering · Medellín, Colombia</p>
+  <p class="video-credit reveal reveal-up delay-3">Danza Contemporánea · Partnering · Medellín, Colombia</p>
 </section>
 
 <!-- CONTACT -->
 <section id="contact">
-  <p class="section-label" style="justify-content:center;">Contacto</p>
-  <h2 class="contact-intro reveal">¿Tienes un proyecto en mente? Hablemos <em>juntos</em>.</h2>
-  <div class="contact-links reveal">
-    <a href="mailto:zarlek.g@gmail.com" class="contact-link">
-      <span class="contact-link-label">Email</span>
-      <span class="contact-link-value">zarlek.g@gmail.com</span>
-    </a>
-    <a href="tel:+573102427662" class="contact-link">
-      <span class="contact-link-label">WhatsApp / Teléfono</span>
-      <span class="contact-link-value">+57 310 242 7662</span>
-    </a>
-    <a href="https://instagram.com/alejo_9610" target="_blank" class="contact-link">
-      <span class="contact-link-label">Instagram</span>
-      <span class="contact-link-value">@alejo_9610</span>
-    </a>
+  <div class="contact-bg" style="background-image:url('https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0013-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T081222Z&X-Amz-Expires=62091&X-Amz-Signature=8d8c874cb124c85a58b2c43f0ecfe00e3b990dc025825dbae443be74ab6b7785&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A27%3A13%20GMT')"></div>
+  <div class="contact-inner">
+    <div class="contact-eyebrow reveal reveal-up">Contacto</div>
+    <h2 class="contact-title reveal reveal-up delay-1">¿Tienes un proyecto<br>que merece un <em>cuerpo</em>?</h2>
+    <p class="contact-sub reveal reveal-up delay-2">Disponible para proyectos escénicos, campañas editoriales, colaboraciones artísticas e interdisciplinares y residencias internacionales.</p>
+    <div class="contact-links reveal reveal-up delay-3">
+      <a href="mailto:zarlek.g@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">zarlek.g@gmail.com</span>
+      </a>
+      <div class="contact-divider"></div>
+      <a href="https://wa.me/573102427662" target="_blank" class="contact-link">
+        <span class="contact-link-label">WhatsApp</span>
+        <span class="contact-link-value">+57 310 242 7662</span>
+      </a>
+      <div class="contact-divider"></div>
+      <a href="https://instagram.com/alejo_9610" target="_blank" class="contact-link">
+        <span class="contact-link-label">Instagram</span>
+        <span class="contact-link-value">@alejo_9610</span>
+      </a>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Diego Alejandro González Martínez</p>
-  <span class="footer-name">Medellín, Colombia</span>
-  <p>Portafolio Artístico</p>
+  <span class="footer-mark">AGM</span>
+  <p>Medellín, Colombia</p>
 </footer>
 
 <script>
-  // Cursor
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
-  function animRing() {
-    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-    ring.style.left = rx+'px'; ring.style.top = ry+'px';
-    requestAnimationFrame(animRing);
-  }
-  animRing();
+// CURSOR
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=mx+'px';cursor.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(a)})();
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        setTimeout(() => e.target.classList.add('visible'), i * 80);
-      }
+// PARALLAX
+const strip=document.getElementById('photoStrip'),stripImg=document.getElementById('stripImg'),stripPh=document.getElementById('stripPlaceholder');
+stripImg.addEventListener('error',()=>{stripImg.style.display='none';stripPh.style.display='flex'});
+window.addEventListener('scroll',()=>{
+  const r=strip.getBoundingClientRect();
+  if(r.bottom>0&&r.top<window.innerHeight) stripImg.style.transform=`translateY(${r.top/window.innerHeight*30}px)`;
+},{passive:true});
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ACCORDION
+document.querySelectorAll('.disc-item').forEach(item=>{
+  item.querySelector('.disc-header').addEventListener('click',()=>{
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.disc-item.open').forEach(o=>{
+      o.classList.remove('open');
+      o.querySelector('.disc-body').style.maxHeight='0';
     });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => obs.observe(el));
+    if(!isOpen){
+      item.classList.add('open');
+      const body=item.querySelector('.disc-body');
+      body.style.maxHeight=item.querySelector('.disc-body-inner').scrollHeight+'px';
+    }
+  });
+});
+
+// LIGHTBOX
+const lbImages=[];
+document.querySelectorAll('[data-lb]').forEach(el=>{
+  const img=el.querySelector('img');
+  if(img) lbImages.push({src:img.src,alt:img.alt});
+});
+const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCount=document.getElementById('lbCounter');
+let lbIdx=0;
+function openLb(i){lbIdx=((i%lbImages.length)+lbImages.length)%lbImages.length;lbImg.src=lbImages[lbIdx].src;lbImg.alt=lbImages[lbIdx].alt;lbCount.textContent=(lbIdx+1)+' / '+lbImages.length;lb.classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){lb.classList.remove('open');document.body.style.overflow=''}
+document.querySelectorAll('[data-lb]').forEach(el=>el.addEventListener('click',()=>openLb(+el.dataset.lb)));
+document.getElementById('lbClose').addEventListener('click',closeLb);
+document.getElementById('lbPrev').addEventListener('click',()=>openLb(lbIdx-1));
+document.getElementById('lbNext').addEventListener('click',()=>openLb(lbIdx+1));
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')openLb(lbIdx-1);if(e.key==='ArrowRight')openLb(lbIdx+1)});
+
+// FALLBACK project cards
+document.querySelectorAll('.proj-card-bg').forEach(el=>{
+  const m=el.style.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/);
+  if(m){const t=new Image();t.onerror=()=>el.style.display='none';t.src=m[1]}
+});
 </script>
 </body>
 </html>
