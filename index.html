@@ -125,24 +125,24 @@ section{padding:110px 60px}
 .proj-card:hover::before{transform:scaleX(1)}
 @media(max-width:900px){.proj-grid{grid-template-columns:1fr}.proj-card{min-height:280px}}
 
-/* GALLERY */
-#gallery{background:var(--deep);padding-bottom:0}
-.gallery-featured{position:relative;height:80vh;overflow:hidden;margin-top:56px;cursor:pointer}
-.gallery-featured img{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.72);transition:transform .8s,filter .5s}
-.gallery-featured:hover img{transform:scale(1.03);filter:brightness(.88)}
-.gallery-featured-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,6,6,.7),transparent 55%);display:flex;align-items:flex-end;padding:48px}
-.gallery-featured-label{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
-.gallery-featured-credit{font-family:'Cormorant',serif;font-size:30px;font-weight:300;color:var(--ivory);margin-top:6px}
-.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:2px}
-.gallery-cell{position:relative;overflow:hidden;aspect-ratio:3/4;cursor:pointer}
-.gallery-cell:nth-child(1){grid-row:span 2;aspect-ratio:auto;min-height:500px}
-.gallery-cell img{width:100%;height:100%;object-fit:cover;filter:brightness(.78);transition:transform .6s,filter .4s;display:block}
-.gallery-cell:hover img{transform:scale(1.06);filter:brightness(1)}
-.gallery-cell-overlay{position:absolute;inset:0;display:flex;align-items:flex-end;padding:18px;background:rgba(6,6,6,0);transition:background .4s}
-.gallery-cell:hover .gallery-cell-overlay{background:rgba(6,6,6,.28)}
-.gallery-cell-credit{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ivory);opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
-.gallery-cell:hover .gallery-cell-credit{opacity:1;transform:translateY(0)}
-@media(max-width:900px){.gallery-featured{height:55vw;min-height:260px}.gallery-grid{grid-template-columns:repeat(2,1fr)}.gallery-cell:nth-child(1){grid-row:span 1;min-height:auto;aspect-ratio:3/4}}
+/* GALLERY — MASONRY */
+#gallery{background:var(--deep)}
+.gallery-filters{display:flex;flex-wrap:wrap;gap:12px;margin-top:52px;margin-bottom:36px}
+.gallery-filter{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);border:1px solid var(--dim);padding:8px 20px;cursor:pointer;background:none;font-family:'Jost',sans-serif;transition:color .3s,border-color .3s,background .3s}
+.gallery-filter:hover{color:var(--ivory);border-color:rgba(196,151,58,.4)}
+.gallery-filter.active{color:var(--gold);border-color:var(--gold);background:rgba(196,151,58,.06)}
+.masonry{columns:3;column-gap:3px;margin-top:3px}
+.masonry-item{break-inside:avoid;position:relative;overflow:hidden;cursor:pointer;margin-bottom:3px;display:block}
+.masonry-item img{width:100%;display:block;filter:brightness(.8);transition:transform .6s ease,filter .5s}
+.masonry-item:hover img{transform:scale(1.04);filter:brightness(1)}
+.masonry-item-overlay{position:absolute;inset:0;background:rgba(6,6,6,0);display:flex;align-items:flex-end;padding:16px;transition:background .4s}
+.masonry-item:hover .masonry-item-overlay{background:rgba(6,6,6,.35)}
+.masonry-item-credit{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--ivory);opacity:0;transform:translateY(5px);transition:opacity .35s,transform .35s}
+.masonry-item:hover .masonry-item-credit{opacity:1;transform:translateY(0)}
+.masonry-item[data-album]{transition:opacity .4s,transform .4s}
+.masonry-item.hidden{opacity:0;pointer-events:none;transform:scale(.96)}
+@media(max-width:900px){.masonry{columns:2}}
+@media(max-width:500px){.masonry{columns:1}}
 
 /* LIGHTBOX */
 .lightbox{position:fixed;inset:0;background:rgba(6,6,6,.97);z-index:1000;display:none;align-items:center;justify-content:center}
@@ -404,36 +404,63 @@ footer p{font-size:11px;color:var(--dim);letter-spacing:.14em}
   </div>
 </section>
 
-<!-- GALLERY -->
+<!-- GALLERY — MASONRY -->
 <section id="gallery">
   <div class="s-label reveal reveal-left">Archivo visual</div>
   <h2 class="s-title reveal reveal-up">Book &amp; <em>Portafolio</em></h2>
-  <div class="gallery-featured reveal reveal-scale" data-lb="0">
-    <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0009-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T010313Z&X-Amz-Expires=86932&X-Amz-Signature=443ffcf801d1b609548ec4163ec5bc9db95f8f45cd8f69369ba70d2f0765da25&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A12%3A05%20GMT" alt="Book 2024 — Ph: Bastian"/>
-    <div class="gallery-featured-overlay">
-      <div>
-        <div class="gallery-featured-label">Book 2024 · Clic para ampliar</div>
-        <div class="gallery-featured-credit">Ph: Bastian</div>
-      </div>
-    </div>
+
+  <!-- Filtros por álbum -->
+  <div class="gallery-filters reveal reveal-up delay-1">
+    <button class="gallery-filter active" data-filter="all">Todos</button>
+    <button class="gallery-filter" data-filter="book2024">Book 2024 · Ph: Bastian</button>
+    <button class="gallery-filter" data-filter="jimenez">Juan Jiménez</button>
+    <button class="gallery-filter" data-filter="escena">En escena</button>
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-cell reveal reveal-up delay-1" data-lb="1">
-      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0008-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T200446Z&X-Amz-Expires=17525&X-Amz-Signature=083ed3200e5957c182f6b3e19e635e4b4cee338fb999a1de1033bd2bd0047e31&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2000%3A56%3A51%20GMT" alt="Book 2024 — Ph: Bastian"/>
-      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">Book 2024 · Ph: Bastian</span></div>
+
+  <!-- Masonry — ⚠️ REEMPLAZAR cada src con /images/nombre.jpg cuando subas tus fotos -->
+  <div class="masonry reveal reveal-up delay-2" id="masonry">
+
+    <!-- BOOK 2024 · PH: BASTIAN -->
+    <div class="masonry-item" data-album="book2024" data-lb="0">
+      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0009-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T010313Z&X-Amz-Expires=86932&X-Amz-Signature=443ffcf801d1b609548ec4163ec5bc9db95f8f45cd8f69369ba70d2f0765da25&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A12%3A05%20GMT" alt="Book 2024"/>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">Book 2024 · Ph: Bastian</span></div>
     </div>
-    <div class="gallery-cell reveal reveal-up delay-2" data-lb="2">
+    <div class="masonry-item" data-album="book2024" data-lb="1">
+      <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0008-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T200446Z&X-Amz-Expires=17525&X-Amz-Signature=083ed3200e5957c182f6b3e19e635e4b4cee338fb999a1de1033bd2bd0047e31&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2000%3A56%3A51%20GMT" alt="Book 2024"/>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">Book 2024 · Ph: Bastian</span></div>
+    </div>
+    <!-- ⚠️ Agrega más fotos del Book 2024 aquí con data-album="book2024" -->
+    <!-- Ejemplo:
+    <div class="masonry-item" data-album="book2024" data-lb="2">
+      <img src="images/book2024-03.jpg" alt="Book 2024"/>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">Book 2024 · Ph: Bastian</span></div>
+    </div>
+    -->
+
+    <!-- JUAN JIMÉNEZ -->
+    <div class="masonry-item" data-album="jimenez" data-lb="2">
       <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0010-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T201104Z&X-Amz-Expires=17516&X-Amz-Signature=366ff37846c84997bf07c8faf9d752cdfa5feebe0af8ac85e5d6a0936f7dee5b&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A03%3A00%20GMT" alt="2021 — Ph: Juan Jiménez"/>
-      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">2021 · Ph: Juan Jiménez</span></div>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">2021 · Ph: Juan Jiménez</span></div>
     </div>
-    <div class="gallery-cell reveal reveal-up delay-3" data-lb="3">
+    <div class="masonry-item" data-album="jimenez" data-lb="3">
       <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0011-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T070139Z&X-Amz-Expires=67081&X-Amz-Signature=22d3b91fa7ecc4ab5ff59836df55d2dbce78b07cf6c961472896807a4728b1e9&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A39%3A40%20GMT" alt="2019 — Ph: Juan Jiménez"/>
-      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">2019 · Ph: Juan Jiménez</span></div>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">2019 · Ph: Juan Jiménez</span></div>
     </div>
-    <div class="gallery-cell reveal reveal-up delay-4" data-lb="4">
+    <div class="masonry-item" data-album="jimenez" data-lb="4">
       <img src="https://export-download.canva.com/DwGdg/DAGXQzDwGdg/-1/0/0012-5716692006030373384.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAQYCGKMUH5AO7UJ26%2F20260326%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260326T161609Z&X-Amz-Expires=32680&X-Amz-Signature=af0a29b193eb3e9ff17c95cd696f355d50631e0daa5b56e85c6070314534ad57&X-Amz-SignedHeaders=host%3Bx-amz-expected-bucket-owner&response-expires=Fri%2C%2027%20Mar%202026%2001%3A20%3A49%20GMT" alt="2018 — Ph: Juan Jiménez"/>
-      <div class="gallery-cell-overlay"><span class="gallery-cell-credit">2018 · Ph: Juan Jiménez</span></div>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">2018 · Ph: Juan Jiménez</span></div>
     </div>
+    <!-- ⚠️ Agrega más fotos de Juan Jiménez aquí con data-album="jimenez" -->
+
+    <!-- EN ESCENA (festivales, teatro, AAINJAA) -->
+    <!-- ⚠️ Agrega fotos de escena con data-album="escena" -->
+    <!-- Ejemplo:
+    <div class="masonry-item" data-album="escena" data-lb="5">
+      <img src="images/aainjaa-jeddah.jpg" alt="Jeddah Season 2019"/>
+      <div class="masonry-item-overlay"><span class="masonry-item-credit">Jeddah Season 2019</span></div>
+    </div>
+    -->
+
   </div>
 </section>
 
@@ -489,8 +516,12 @@ footer p{font-size:11px;color:var(--dim);letter-spacing:.14em}
     <p class="contact-sub reveal reveal-up delay-2">Disponible para proyectos escénicos, campañas editoriales, colaboraciones artísticas e interdisciplinares y residencias internacionales.</p>
     <div class="contact-links reveal reveal-up delay-3">
       <a href="mailto:zarlek.g@gmail.com" class="contact-link">
-        <span class="contact-link-label">Email</span>
+        <span class="contact-link-label">Email personal</span>
         <span class="contact-link-value">zarlek.g@gmail.com</span>
+      </a>
+      <div class="contact-divider"></div>
+      <a href="mailto:dialejo.gm@gmail.com" class="contact-link">
+        <span class="contact-link-label">Email profesional</span>
         <span class="contact-link-value">dialejo.gm@gmail.com</span>
       </a>
       <div class="contact-divider"></div>
@@ -514,6 +545,73 @@ footer p{font-size:11px;color:var(--dim);letter-spacing:.14em}
 </footer>
 
 <script>
+// FILTROS MASONRY
+document.querySelectorAll('.gallery-filter').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.gallery-filter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.masonry-item').forEach(item => {
+      if (filter === 'all' || item.dataset.album === filter) {
+        item.classList.remove('hidden');
+      } else {
+        item.classList.add('hidden');
+      }
+    });
+    // Recalcular lightbox images tras filtrar
+    buildLbImages();
+  });
+});
+
+// LIGHTBOX — construir dinámicamente según items visibles
+let lbImages = [];
+function buildLbImages() {
+  lbImages = [];
+  document.querySelectorAll('.masonry-item:not(.hidden)[data-lb]').forEach(el => {
+    const img = el.querySelector('img');
+    if (img) lbImages.push({ src: img.src, alt: img.alt });
+  });
+}
+buildLbImages();
+
+const lb = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCount = document.getElementById('lbCounter');
+let lbIdx = 0;
+
+function openLb(src, alt) {
+  lbIdx = lbImages.findIndex(i => i.src === src);
+  if (lbIdx < 0) lbIdx = 0;
+  lbImg.src = lbImages[lbIdx].src;
+  lbImg.alt = lbImages[lbIdx].alt;
+  lbCount.textContent = (lbIdx + 1) + ' / ' + lbImages.length;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function navLb(dir) {
+  lbIdx = ((lbIdx + dir) % lbImages.length + lbImages.length) % lbImages.length;
+  lbImg.src = lbImages[lbIdx].src;
+  lbImg.alt = lbImages[lbIdx].alt;
+  lbCount.textContent = (lbIdx + 1) + ' / ' + lbImages.length;
+}
+function closeLb() { lb.classList.remove('open'); document.body.style.overflow = ''; }
+
+document.querySelectorAll('.masonry-item').forEach(el => {
+  el.addEventListener('click', () => {
+    const img = el.querySelector('img');
+    if (img) openLb(img.src, img.alt);
+  });
+});
+document.getElementById('lbClose').addEventListener('click', closeLb);
+document.getElementById('lbPrev').addEventListener('click', () => navLb(-1));
+document.getElementById('lbNext').addEventListener('click', () => navLb(1));
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => {
+  if (!lb.classList.contains('open')) return;
+  if (e.key === 'Escape') closeLb();
+  if (e.key === 'ArrowLeft') navLb(-1);
+  if (e.key === 'ArrowRight') navLb(1);
+});
 // CURSOR
 const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
 let mx=0,my=0,rx=0,ry=0;
@@ -548,29 +646,6 @@ document.querySelectorAll('.disc-item').forEach(item=>{
       body.style.maxHeight=item.querySelector('.disc-body-inner').scrollHeight+'px';
     }
   });
-});
-
-// LIGHTBOX
-const lbImages=[];
-document.querySelectorAll('[data-lb]').forEach(el=>{
-  const img=el.querySelector('img');
-  if(img) lbImages.push({src:img.src,alt:img.alt});
-});
-const lb=document.getElementById('lightbox'),lbImg=document.getElementById('lbImg'),lbCount=document.getElementById('lbCounter');
-let lbIdx=0;
-function openLb(i){lbIdx=((i%lbImages.length)+lbImages.length)%lbImages.length;lbImg.src=lbImages[lbIdx].src;lbImg.alt=lbImages[lbIdx].alt;lbCount.textContent=(lbIdx+1)+' / '+lbImages.length;lb.classList.add('open');document.body.style.overflow='hidden'}
-function closeLb(){lb.classList.remove('open');document.body.style.overflow=''}
-document.querySelectorAll('[data-lb]').forEach(el=>el.addEventListener('click',()=>openLb(+el.dataset.lb)));
-document.getElementById('lbClose').addEventListener('click',closeLb);
-document.getElementById('lbPrev').addEventListener('click',()=>openLb(lbIdx-1));
-document.getElementById('lbNext').addEventListener('click',()=>openLb(lbIdx+1));
-lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
-document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')openLb(lbIdx-1);if(e.key==='ArrowRight')openLb(lbIdx+1)});
-
-// FALLBACK project cards
-document.querySelectorAll('.proj-card-bg').forEach(el=>{
-  const m=el.style.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/);
-  if(m){const t=new Image();t.onerror=()=>el.style.display='none';t.src=m[1]}
 });
 </script>
 </body>
